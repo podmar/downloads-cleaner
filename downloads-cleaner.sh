@@ -4,15 +4,15 @@
 # Author: podmar
 
 # directory_to_clean="$1"
-# cd "$directory_to_clean"
+# cd "$directory_to_clean" || exit
 
-cd $HOME/Desktop/test_downloads
+cd $HOME/Desktop/test_downloads || exit
 
 directory_name="dir_archive_$(date +"%d-%m-%Y")"
 mkdir "$directory_name"
 
 find . -maxdepth 1 -mindepth 1 -type d -mtime +30 |
-xargs -I '{}' mv {} ./$directory_name
+xargs -I "{}" mv {} ./"$directory_name"
 
 echo "$directory_name folder created and items older than 30 days archived"
 
