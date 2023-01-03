@@ -19,7 +19,8 @@ echo "All folders older than 14 days archived in $directory_name"
 extension_list=$(find . -maxdepth 1 -type f -name "[^.]*.*" -mtime +14 | sed "s|.*\.||" | sort -u | tr "\n" " ")
 
 # for each extension create a folder and move files older than 14 days inside
-for extension in $extension_list; do
+for extension in $extension_list
+do
     dir_name=${extension}_archive_$(date +"%d-%m-%Y")
     mkdir "$dir_name"
     find . -maxdepth 1 -type f -name "*.$extension" -mtime +14 |
