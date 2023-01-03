@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
-echo $BASH_VERSION
-# always use a shebang with path to bash to indicate which interepreter should be used; bash will automatically open
 
 # Sort and archive files in the downloads folder
 # Author: podmar
 
-directory="$HOME/Downloads"
-cd "$directory"
-mkdir $1
-cd $1
-pwd
-# mkdir Archive
+# direcotry_to_clean="$1"
+# cd $directory_to_clean
+
+cd $HOME/Desktop/test_downloads
+
+directory_name="dir_archive_$(date +"%d-%m-%Y")"
+mkdir "$directory_name"
+
+find . -maxdepth 1 -mindepth 1 -type d -mtime +30 | xargs -I '{}' mv {} ./$directory_name
+
+echo "$directory_name folder created and items older than 30 days archived"
